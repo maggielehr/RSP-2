@@ -1,0 +1,279 @@
+\documentclass[12pt,dvipsnames]{amsart}
+\usepackage{lscape}
+\usepackage{graphicx}
+\usepackage[round]{natbib}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{euscript}
+\usepackage{amsmath, amsthm,amsfonts, amssymb, phonetic, minitoc}
+\usepackage{amsaddr}
+\usepackage{dirtytalk}
+\usepackage[normalem]{ulem} % either use this (simple) or
+%\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks,allcolors=OliveGreen]{hyperref}
+\usepackage[title]{appendix}
+
+
+\linespread{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%extended offsets:
+%\addtolength{\hoffset}{-1.5cm}
+%\addtolength{\textwidth}{3cm}
+%\addtolength{\voffset}{-1.8cm}
+%%\addtolength{\textheight}{3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newdimen\slantmathcorr
+\def\oversl#1{%assuming that mathslant=0.25
+\setbox0=\hbox{$#1$}
+\slantmathcorr=\wd0
+\hskip 0.2\slantmathcorr \overline{\hbox to 0.8\wd0{%
+\vphantom{\hbox{$#1$}}}}
+\hskip-\wd0\hbox{$#1$}
+}
+
+\def\undersl#1{%assuming that mathslant=0.25
+\setbox0=\hbox{$#1$}
+\slantmathcorr=\wd0
+\underline{\hbox to 0.8\wd0{%
+\vphantom{\hbox{$#1$}}}}
+\hskip-0.8\wd0\hbox{$#1$}
+}
+
+\makeatletter
+\renewcommand{\email}[2][]{%
+  \ifx\emails\@empty\relax\else{\g@addto@macro\emails{,\space}}\fi%
+  \@ifnotempty{#1}{\g@addto@macro\emails{\textrm{(#1)}\space}}%
+  \g@addto@macro\emails{#2}%
+}
+\makeatother
+
+
+
+\def\ul{\underline}
+
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows}
+\usetikzlibrary{backgrounds,positioning,fit,petri,calc,matrix,automata}
+
+
+
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{cor}{Corollary}
+\newtheorem{defn}{Definition}
+\newtheorem{rem}{Remark}
+\newtheorem{obs}{Observation}
+
+%\numberwithin{equation}{section}
+% MATH -----------------------------------------------------------
+% nice R for real numbers
+\newcommand{\R}{\mathbb{R}}
+% strategies of the first-mover
+\newcommand{\gF}{\mathcal{F}}
+% strategies of the second-mover
+\newcommand{\gS}{\mathcal{S}}
+% family of games
+\newcommand{\gG}{\mathcal{G}}
+
+
+
+
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\IND}{\mathbf{1}}
+
+\newcommand{\gB}{\mathcal{B}}
+\newcommand{\gL}{\mathcal{L}}
+
+\newcommand{\supp}{\mathrm{supp}}
+
+\newcommand{\rteq}{\unlhd}
+\newcommand{\rt}{\lhd}
+
+\newcommand{\lteq}{\unrhd}
+\newcommand{\lt}{\rhd}
+
+
+\newcommand{\interior}{\mathrm{int}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+
+
+\title{RSP$^2$}
+\author[A. Dolgopolov]{Arthur Dolgopolov}
+\author[M. Freer]{Mikhail Freer}
+\author[M. Lehr]{Maggie Lehr}
+
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions}
+Consider an agent who makes a choice over $x\in \R^N_+$ which distributes resources between herself and $N-1$ other players. Let
+$x = (x_s,x_O)$, where $x_s\in {\mathbb{R}}_+$ determines the player’s own payoff and $x_O \in {\mathbb{R}}^{N-1}_+$ is the payoff to all other players.We assume that a player is choosing from the budget set (or the set of available actions), denoted by $B$.Given the $\geq$ partial order of the 
+downward closure of the budget constraint over ${\mathbb{R}}^N_+$, defined by,
+$$
+B_{\geq} = \{y: \text{ there is } x\in B \text{ such that } y \geq x\}
+$$
+such that $B_{>}$ is the interior of the downward closure.
+
+In practice we observe only finite set of choices. Dataset
+$D=\{(x^t,B^t)\}$ is the collection of choices from available budgets. In the
+general case we assume the budgets to be compact. In addition, if
+we consider a uniformly distributed decision, in which every dollar is equally distributed among all other players despite their initial endowments,we only need the expenditures to be distributed at an equal rate.\footnote{
+	In more general setting we can allow the money to be distributed at constant pace for only sub-population.
+	Moreover, it can be possible that money are distributed with different weights to the different parts of the population, however, the player herself can only decide on the total amount of money to be distributed, but not the detailed distribution to each member.
+}
+We refer to such experiment as to \emph{uniform experiment}.
+This is a common feature of the labor supply
+subject to re-distributive taxation, or when choosing the optimal tax rates.
+
+We are looking for the utility function which is consistent 
+with a particular theory and rationalizes the observed choices made by the agent. This means that the chosen point is at least as good as every choice in the budget set. Next, we
+provide detailed definitions for every theory considered.
+
+
+
+\subsection{Altruistic Preferences}
+In this case, a player gets utility from her own payoff as well as the payoff of every other player. We explicitly refer to these preferences as altruistic because we do not require, in general, the budget to be equal to it’s downward closure. If it is the case, then the assumption of monotonicity of the utility function can be reduced to the standard
+notion of other-regarding preferences. That is, utility function is locally non-satiated.
+
+
+\begin{defn}
+\label{def:OR}
+A dataset $D=\{(x^t,B^t)\}$ is rationalizable with altruistic preferences if there is a continuous and monotone utility function $u:\R^N_+\rightarrow \R$ such that $u(x^t) \in \argmax\limits_{x\in B^t} u(x)$.
+\end{defn}
+
+
+\subsection{Justice Seeking Preferences}
+We assume that a person gets utility from her own payoff and the perceived justice in the society. We use a general concept of justice consistent with the notion of justice is some social welfare function, which aggregates the payoffs
+the entire group receives \cite{becker2013revealed}. The definition of the notion of justice we use allows for many different distributional preferences. For instance, both utilitarian and egalitarian preferences can be
+classified as justice seeking preferences. 
+
+
+Denote $S_n$ to be the space of all possible permutations of the vector of length $n$ and by $\sigma\in S_n$ a permutation.
+
+\begin{defn}
+\label{def:NotionOfJustice}
+A continuous function $f:\R^{N-1}\rightarrow \R$ is said to be a justice function if it satisfies
+\begin{itemize}
+	\item monotonicity: $x\geq (>) x'$ implies $f(x)\geq (>) f(x')$ for every $x,x'\in \R^{N-1}_+$, and
+	\item symmetric: $f(x)=f(\sigma(x))$ for every $\sigma\in S_{N-1}$.
+\end{itemize} 
+\end{defn}
+
+Using this notion of justice, a choice can be consistent with justice seeking
+preferences if it satisfies Pareto ordering and is anonymous. 
+These general specification are satisfied by
+most social welfare functions. However, let us note that the notion of
+justice does not depend on the payoff the player receives herself. The 
+interdependence between the distribution of payoffs in the
+society and the payoff the player receives is done via the utility
+function.\footnote{
+	If we include $x_s$ into the justice function, all the further results would still be necessary, being also sufficient for special cases.
+	For more details on this case see \cite{becker2013revealed}
+}
+
+\begin{defn}
+\label{def:JS}
+$f:\R^{N-1}\rightarrow \R$ be a justice function.
+A dataset $D=\{(x^t,B^t)\}$ is rationalizable with justice seeking preferences if there is a continuous and monotone utility function $u(x_s,f(x_O))$ such that $u(x^t) \in \argmax\limits_{x\in B^t} u(x)$.
+\end{defn}
+
+
+\subsection{Inequality Averse Preferences}
+Next, we consider a person who has notion of justice that is inequality averse. This means the agent would prefer to transfer resources from an agent with a larger endowment to an agent with a lower endowment, given that the ordering of people is preserved. This property is referred to in the literature on inequality measures as the
+Pigou-Dalton (transfer) principle. We can define the inequality
+measure as,
+
+\begin{defn}
+A continuous function $f:\R^{N-1}\rightarrow \R$ is said to be an inequality measure if it satisfies
+\begin{itemize}
+	\item inequality aversion: $x$ can be obtained (in relative income terms) from $x'$ by a sequence of Pigou-Dalton transfers implies $f(x)\geq (>) f(x')$ for every $x,x'\in \R^{N-1}_+$, and
+	\item symmetric: $f(x)=f(\sigma(x))$ for every $\sigma\in S_{N-1}$.
+\end{itemize} 
+\end{defn}
+
+Note that inequality measures do not take into account the possible dominance relations over the income distributions. Both
+properties can be merged upon necessity (see Appendix X for more
+details). However, this would deliver the theory which is weaker than both inequality aversion and justice seeking preferences.
+
+\begin{defn}
+\label{def:IA}
+$f:\R^{N-1}\rightarrow \R$ be an inequality measure.
+A dataset $D=\{(x^t,B^t)\}$ is rationalizable with inequality averse preferences if there is a continuous and monotone utility function $u(x_s,f(x_O))$ such that $u(x^t) \in \argmax\limits_{x\in B^t} u(x)$.
+\end{defn}
+
+
+
+
+\section{Results}
+
+Next, we present the revealed preference tests for the three theories of social preferences listed above. We start with presenting the test for altruistic preferences, next we present the test for the justice seeking preferences, and finally the test for the inequality averse preferences.
+
+
+\subsection{Altruistic Preferences}
+
+Prior studies of altruistic preferences (\cite{afriat1967construction}, and more recently \cite{nishimura2017unified}) have shown that rationalization with altruistic preferences is equivalent to the Generalized Axiom of Revealed Preferences \citep[introduced by][]{varian1982nonparametric}.
+
+
+
+\begin{defn}
+\label{def:GARP}
+A dataset satisfies GARP if for every sequence $x^{t_1},\ldots,x^{t_n}$ such that $x^{t_j} \in B^{t_{j+1}}_{\geq}$ for every $j\in \{1,\ldots,n-1\}$ then $x^{t_n} \notin B^{t_1}_{>_{t_1}}$.
+\end{defn}
+
+\begin{thm}[\cite{afriat1967construction,varian1982nonparametric}]
+\label{thm:AP}
+A dataset is rationalizable with altruistic preferences if and only if it satisfes GARP.
+\end{thm}
+
+
+
+
+
+
+\subsection{Justice Seeking Preferences}
+\begin{defn}
+\label{def:SyGARP}
+A dataset satisfies Sy-GARP if for every sequence $x^{t_1},\ldots,x^{t_n}$ such that $(x^{t_j}_s,\sigma(x_O^{t_j})) \in B^{t_{j+1}}_{\geq}$ for some $\sigma\in S_{N-1}$ and for every $j\in \{1,\ldots,n-1\}$ then there is no $\sigma\in S_{N-1}$ such that $(x^{t_n}_s, \sigma(x^{t_n}_O)) \notin B^{t_1}_{>_{t_1}}$.
+\end{defn}
+
+\begin{thm}
+\label{thm:JS}
+If an experiment is rationalizable with justice seeking preferences, then it satisfies Sy-GARP.
+Moreover, if data comes from the uniform experiment, then the reverse is also true.
+\end{thm}
+
+
+
+\subsection{Inequality Averse Preferences}
+
+Consider a Lorenz curve, $L(u)$, where $u\in[0,1]$ are the incomes in normalized (by the maximum income) terms. We consider $L$ to \emph{dominate} $L'$ if $L(u)\geq L'(u)$ for every $u\in[0,1]$.
+
+\begin{defn}
+\label{def:LDGARP}
+A dataset satisfies LD-GARP if for every sequence $x^{t_1},\ldots,x^{t_n}$ such that $x^{t_j}_s\geq x^{t_{j+1}}_s$ and $L^{t_j}(u)$ dominates $L^{t_{j+1}}(u)$ for some $\sigma\in S_{N-1}$ and for every $j\in \{1,\ldots,n-1\}$ then $x^{t_1}_s\leq x^{t_{n}}_s$ or/and $L^{t_1}(u)$ not dominates $L^{t_{n}}(u)$.
+\end{defn}
+
+\begin{thm}
+\label{thm:IA}
+If an experiment is rationalizable with inequality averse preferences, then it satisfies LD-GARP.
+Moreover, if data comes from the uniform experiment, then the reverse is also true.
+\end{thm}
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

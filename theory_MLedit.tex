@@ -1,0 +1,202 @@
+---
+author:
+- Arthur Dolgopolov
+- Mikhail Freer
+- Maggie Lehr
+bibliography:
+- 'refs.bib'
+title: RSP$^2$
+---
+
+-   [Definitions](#definitions)
+    -   [Altruistic Preferences](#altruistic-preferences)
+    -   [Justice Seeking Preferences](#justice-seeking-preferences)
+    -   [Inequality Averse Preferences](#inequality-averse-preferences)
+-   [Results](#results)
+    -   [Altruistic Preferences](#altruistic-preferences-1)
+    -   [Justice Seeking Preferences](#justice-seeking-preferences-1)
+    -   [Inequality Averse
+        Preferences](#inequality-averse-preferences-1)
+
+Definitions
+===========
+
+Consider an agent who must make a choice, $x\in {\mathbb{R}}^N_+$, to 
+distribute resources between herself and $N$ other players. Let
+$x = (x_s,x_O)$, where $x_s\in {\mathbb{R}}_+$ determines player’s own
+payoff and $x_O \in {\mathbb{R}}^{N-1}_+$ is the payoff to all other
+players. We assume that a player is choosing from the budget set (or the
+set of available actions), denoted by $B$. Given the $\geq$ partial order of the 
+downward closure of the budget constraint over ${\mathbb{R}}^N_+$, defined by
+$$B_{\geq} = \{y: \text{ there is } x\in B \text{ such that } y \geq x\}$$
+such that $B_{>}$ is the interior of the downward closure.
+
+In practice we observe only finite set of choices. Dataset
+$D=\{(x^t,B^t)\}$ is the collection of choices from available budgets. In the
+general case we assume the budgets to be compact. In addition, if
+we consider a uniformly distributed decision, in which every dollar is
+equally distributed among all other players despite their initial endowments,
+we only need the expenditures to be distributed at an equal rate.[^1] 
+We refer to such experiment as to *uniform
+experiment*. This is a common feature of the labor supply
+subject to re-distributive taxation, or when choosing the optimal tax rates.
+
+We are looking for the utility function which is consistent 
+with a particular theory and rationalizes the observed choices made 
+by the agent. This means that chosen point is at least as good as 
+every choice in the budget set. Next, we
+provide detailed definitions for every theory considered.
+
+Altruistic Preferences
+----------------------
+
+In this case, a player gets utility from her own payoff as well as the payoff of
+every other player. We explicitly refer to these preferences as
+altruistic because we do not require, in general, the budget to be equal to
+it’s downward closure. If it is the case, then the assumption of
+monotonicity of the utility function can be reduced to the standard
+notion of other-regarding preferences. That is, utility function is 
+locally non-satiated.
+
+\[def:OR\] A dataset $D=\{(x^t,B^t)\}$ is rationalizable with altruistic
+preferences if there is a continuous and monotone utility function
+$u:{\mathbb{R}}^N_+\rightarrow {\mathbb{R}}$ such that
+$u(x^t) \in {\operatornamewithlimits{argmax}}\limits_{x\in B^t} u(x)$.
+
+Justice Seeking Preferences
+---------------------------
+
+We assume that a person gets utility from her own payoff and the perceived 
+justice in the society. We use a general concept of justice consistent with
+the notion of justice is some social welfare function, which aggregates the payoffs
+the entire group receives [@becker2013revealed]. This definition of the 
+notion of justice we use allows for many different distributional preferences.
+For instance, both utilitarian and egalitarian preferences can be 
+classified as justice seekend preferences. 
+
+Denote $S_n$ as the space of all
+possible permutations of the vector of length $n$ and by $\sigma\in S_n$
+a permutation.
+
+\[def:NotionOfJustice\] A continuous function
+$f:{\mathbb{R}}^{N-1}\rightarrow {\mathbb{R}}$ is said to be a justice
+function if it satisfies
+
+-   monotonicity: $x\geq (>) x'$ implies $f(x)\geq (>) f(x')$ for every
+    $x,x'\in {\mathbb{R}}^{N-1}_+$, and
+
+-   symmetric: $f(x)=f(\sigma(x))$ for every $\sigma\in S_{N-1}$.
+
+Using this notion of justice, a choice can be consistent with justice seeking
+preferences if it satisfies Pareto ordering and is anonymous. 
+These general specification are satisfied by
+most social welfare functions. However, let us note that the notion of
+justice does not depend on the payoff the player receives herself. The 
+interdependence between the distribution of payoffs in the
+society and the payoff the player receives is done via the utility
+function.[^2]
+
+\[def:JS\] $f:{\mathbb{R}}^{N-1}\rightarrow {\mathbb{R}}$ be a justice
+function. A dataset $D=\{(x^t,B^t)\}$ is rationalizable with justice
+seeking preferences if there is a continuous and monotone utility
+function $u(x_s,f(x_O))$ such that
+$u(x^t) \in {\operatornamewithlimits{argmax}}\limits_{x\in B^t} u(x)$.
+
+Inequality Averse Preferences
+-----------------------------
+
+Next, we consider a person who has notion of justice that is inequality averse. 
+This means the agent would a transfer of resources from an agent with a 
+larger endowment to an agent with a lower endowment, such that the 
+ordering of people is preserved. This property is referred 
+to in the literature on inequality measures as the
+Pigou-Dalton (transfer) principle. We can define the inequality
+measure as,
+
+(THERE SHOULD BE CODE FOR A DEFINITION HERE)
+A continuous function $f:{\mathbb{R}}^{N-1}\rightarrow {\mathbb{R}}$ is
+said to be an inequality measure if it satisfies
+
+-   inequality aversion: $x$ can be obtained (in relative income terms)
+    from $x'$ by a sequence of Pigou-Dalton transfers implies
+    $f(x)\geq (>) f(x')$ for every $x,x'\in {\mathbb{R}}^{N-1}_+$, and
+
+-   symmetric: $f(x)=f(\sigma(x))$ for every $\sigma\in S_{N-1}$.
+
+Note that inequality measures do not take into account the possible
+dominance relations over the income distributions. Both
+properties can be merged upon necessity (see Appendix X for more
+details). However, this would deliver the theory which is weaker than
+both inequality aversion and justice seeking preferences.
+
+\[def:IA\] $f:{\mathbb{R}}^{N-1}\rightarrow {\mathbb{R}}$ be an
+inequality measure. A dataset $D=\{(x^t,B^t)\}$ is rationalizable with
+inequality averse preferences if there is a continuous and monotone
+utility function $u(x_s,f(x_O))$ such that
+$u(x^t) \in {\operatornamewithlimits{argmax}}\limits_{x\in B^t} u(x)$.
+
+Results
+=======
+
+Next, we present the revealed preference tests for the three theories of
+social preferences listed above. We start with presenting the test for
+altruistic preferences, next we present the test for the justice seeking
+preferences, and finally the test for the inequality averse preferences.
+
+Altruistic Preferences
+----------------------
+
+Prior studies of altruistic preferences ([@afriat1967construction], 
+[@nishimura2017unified]) have shown that rationalization with altruistic
+preferences is equivalent to the Generalized Axiom of Revealed
+Preferences [introduced by @varian1982nonparametric].
+
+\[def:GARP\] A dataset satisfies GARP if for every sequence
+$x^{t_1},\ldots,x^{t_n}$ such that $x^{t_j} \in B^{t_{j+1}}_{\geq}$ for
+every $j\in \{1,\ldots,n-1\}$ then $x^{t_n} \notin B^{t_1}_{>_{t_1}}$.
+
+\[[@afriat1967construction; @varian1982nonparametric]\] \[thm:AP\] A
+dataset is rationalizable with altruistic preferences if and only if it
+satisfes GARP.
+
+Justice Seeking Preferences
+---------------------------
+
+\[def:SyGARP\] A dataset satisfies Sy-GARP if for every sequence
+$x^{t_1},\ldots,x^{t_n}$ such that
+$(x^{t_j}_s,\sigma(x_O^{t_j})) \in B^{t_{j+1}}_{\geq}$ for some
+$\sigma\in S_{N-1}$ and for every $j\in \{1,\ldots,n-1\}$ then there is
+no $\sigma\in S_{N-1}$ such that
+$(x^{t_n}_s, \sigma(x^{t_n}_O)) \notin B^{t_1}_{>_{t_1}}$.
+
+\[thm:JS\] If an experiment is rationalizable with justice seeking
+preferences, then it satisfies Sy-GARP. Moreover, if data comes from the
+uniform experiment, then the reverse is also true.
+
+Inequality Averse Preferences
+-----------------------------
+
+consider Lorenz curve, denoted by $L(u)$, where $u\in[0,1]$ are the incomes in
+normalized (by the maximum income) terms. We consider $L$ to
+*dominate* $L'$ if $L(u)\geq L'(u)$ for every $u\in[0,1]$.
+
+\[def:LDGARP\] A dataset satisfies LD-GARP if for every sequence
+$x^{t_1},\ldots,x^{t_n}$ such that $x^{t_j}_s\geq x^{t_{j+1}}_s$ and
+$L^{t_j}(u)$ dominates $L^{t_{j+1}}(u)$ for some $\sigma\in S_{N-1}$ and
+for every $j\in \{1,\ldots,n-1\}$ then $x^{t_1}_s\leq x^{t_{n}}_s$
+or/and $L^{t_1}(u)$ not dominates $L^{t_{n}}(u)$.
+
+\[thm:IA\] If an experiment is rationalizable with inequality averse
+preferences, then it satisfies LD-GARP. Moreover, if data comes from the
+uniform experiment, then the reverse is also true.
+
+[^1]: In more general setting we can allow the money to be distributed
+    at constant pace for only sub-population. Moreover, it can be
+    possible that money are distributed with different weights to the
+    different parts of the population, however, the player herself can
+    only decide on the total amount of money to be distributed, but not
+    the detailed distribution to each member.
+
+[^2]: If we include $x_s$ into the justice function, all the further
+    results would still be necessary, being also sufficient for special
+    cases. For more details on this case see [@becker2013revealed]
